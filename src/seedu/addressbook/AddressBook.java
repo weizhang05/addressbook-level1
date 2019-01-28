@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Scanner;
@@ -776,6 +777,19 @@ public class AddressBook {
      *        INTERNAL ADDRESS BOOK DATA METHODS
      * ================================================================================
      */
+    
+    /**
+     * Sorts persons in address book alphabetically.
+     */
+    private static void sortPersonsInAddressBook(){
+        Collections.sort(ALL_PERSONS, new Comparator<String[]>(){
+            @Override
+            public int compare(String[] o1, String[] o2) {
+                // TODO Auto-generated method stub
+                return o1[0].compareTo(o2[0]);
+            }
+        });
+    }
 
     /**
      * Adds a person to the address book. Saves changes to storage file.
@@ -784,6 +798,7 @@ public class AddressBook {
      */
     private static void addPersonToAddressBook(String[] person) {
         ALL_PERSONS.add(person);
+        sortPersonsInAddressBook();
         savePersonsToFile(getAllPersonsInAddressBook(), storageFilePath);
     }
 
